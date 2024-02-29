@@ -40,17 +40,15 @@ public class AuthenticationController {
 
     @GetMapping("check-token")
     public ResponseEntity<?> checkToken(@AuthenticationPrincipal UserPrincipal userPrincipal){
-        Optional<UserModel> userModel = userService.findByUsername(userPrincipal.getUsername());
-        if (userModel.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }
-        UserModel prueba = new UserModel();
-        prueba.setId(userModel.get().getId());
-        prueba.setRole(userModel.get().getRole());
-        prueba.setName(userModel.get().getName());
-        prueba.setUsername(userModel.get().getUsername());
-        prueba.setPassword(userModel.get().getPassword());
-        prueba.setCreated_at(userModel.get().getCreated_at());
-        return new ResponseEntity<>(authenticationService.checkToken(prueba), HttpStatus.OK);
+
+        UserModel userModel = new UserModel();
+        userModel.setId(userPrincipal.getId());
+        userModel.setRole(userPrincipal.getUserModel().getRole());
+        userModel.setName(userPrincipal.getUserModel().getName());
+        userModel.setUsername(userPrincipal.getUsername());
+        userModel.setPassword(userPrincipal.getPassword());
+        userModel.setCreated_at(userPrincipal.getUserModel().getCreated_at());
+
+        return new ResponseEntity<>(authenticationService.checkToken(userModel), HttpStatus.OK);
     }
 }
