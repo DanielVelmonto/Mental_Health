@@ -2,14 +2,14 @@ package co.com.mentalhealth.apigateway.service;
 
 
 import co.com.mentalhealth.apigateway.model.Role;
-import co.com.mentalhealth.apigateway.model.User;
+import co.com.mentalhealth.apigateway.model.UserModel;
 
 import java.util.Optional;
 
 public interface UserService {
-    User save(User user);
+    UserModel save(UserModel userModel);
 
-    Optional<User> findByUsername(String username);
+    Optional<UserModel> findByUsername(String username);
 
     void changeRole(Role newRole, String username);
 

@@ -1,7 +1,7 @@
 package co.com.mentalhealth.apigateway.security;
 
 
-import co.com.mentalhealth.apigateway.model.User;
+import co.com.mentalhealth.apigateway.model.UserModel;
 import co.com.mentalhealth.apigateway.service.UserService;
 import co.com.mentalhealth.apigateway.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +21,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.findByUsername(username)
+        UserModel userModel = userService.findByUsername(username)
                 .orElseThrow( () -> new UsernameNotFoundException("El usuario no fue encontrado: "+username));
-        Set<GrantedAuthority> authorities = Set.of(SecurityUtils.convertToAuthority(user.getRole().name()));
+        Set<GrantedAuthority> authorities = Set.of(SecurityUtils.convertToAuthority(userModel.getRole().name()));
         return UserPrincipal.builder()
-                .user(user)
-                .id(user.getId())
+                .userModel(userModel)
+                .id(userModel.getId())
                 .username(username)
-                .password(user.getPassword())
+                .password(userModel.getPassword())
                 .authorities(authorities)
                 .build();
     }

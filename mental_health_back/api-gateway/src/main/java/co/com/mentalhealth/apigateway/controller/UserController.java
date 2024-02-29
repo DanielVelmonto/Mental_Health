@@ -1,7 +1,6 @@
 package co.com.mentalhealth.apigateway.controller;
 
 import co.com.mentalhealth.apigateway.model.Role;
-import co.com.mentalhealth.apigateway.model.User;
 import co.com.mentalhealth.apigateway.security.UserPrincipal;
 import co.com.mentalhealth.apigateway.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("api/userModel")
 public class UserController {
 
     @Autowired

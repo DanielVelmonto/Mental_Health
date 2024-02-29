@@ -1,7 +1,7 @@
 package co.com.mentalhealth.apigateway.controller;
 
 
-import co.com.mentalhealth.apigateway.model.User;
+import co.com.mentalhealth.apigateway.model.UserModel;
 import co.com.mentalhealth.apigateway.service.AuthenticationService;
 import co.com.mentalhealth.apigateway.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +23,17 @@ public class AuthenticationController {
     private UserService userService;
 
     @PostMapping("sing-up")
-    public ResponseEntity<?> singUp(@RequestBody User user){
-        if (userService.findByUsername(user.getUsername()).isPresent()){
+    public ResponseEntity<?> singUp(@RequestBody UserModel userModel){
+        if (userService.findByUsername(userModel.getUsername()).isPresent()){
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 
-        return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.save(userModel), HttpStatus.CREATED);
     }
 
     @PostMapping("sing-in")
-    public ResponseEntity<?> singIn(@RequestBody User user){
+    public ResponseEntity<?> singIn(@RequestBody UserModel userModel){
 
-        return new ResponseEntity<>(authenticationService.singInAndReturnJWT(user), HttpStatus.OK);
+        return new ResponseEntity<>(authenticationService.singInAndReturnJWT(userModel), HttpStatus.OK);
     }
 }

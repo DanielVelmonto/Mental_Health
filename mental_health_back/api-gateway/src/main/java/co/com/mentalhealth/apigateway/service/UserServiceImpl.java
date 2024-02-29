@@ -2,7 +2,7 @@ package co.com.mentalhealth.apigateway.service;
 
 
 import co.com.mentalhealth.apigateway.model.Role;
-import co.com.mentalhealth.apigateway.model.User;
+import co.com.mentalhealth.apigateway.model.UserModel;
 import co.com.mentalhealth.apigateway.repository.UserRepository;
 import co.com.mentalhealth.apigateway.security.jwt.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,19 +26,19 @@ public class UserServiceImpl implements UserService{
     private JwtProvider jwtProvider;
 
     @Override
-    public User save(User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(Role.USER);
-        user.setCreated_at(LocalDateTime.now());
-        User userCreated = userRepository.save(user);
-        String jwt = jwtProvider.generateToken(userCreated);
-        userCreated.setToken(jwt);
+    public UserModel save(UserModel userModel){
+        userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
+        userModel.setRole(Role.USER);
+        userModel.setCreated_at(LocalDateTime.now());
+        UserModel userModelCreated = userRepository.save(userModel);
+        String jwt = jwtProvider.generateToken(userModelCreated);
+        userModelCreated.setToken(jwt);
 
-        return userCreated;
+        return userModelCreated;
     }
 
     @Override
-    public Optional<User> findByUsername(String username){
+    public Optional<UserModel> findByUsername(String username){
         return userRepository.findByUsername(username);
     }
 

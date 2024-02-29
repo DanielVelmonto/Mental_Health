@@ -1,7 +1,7 @@
 package co.com.mentalhealth.apigateway.security;
 
 
-import co.com.mentalhealth.apigateway.model.User;
+import co.com.mentalhealth.apigateway.model.UserModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,7 +21,7 @@ public class UserPrincipal implements UserDetails {
     private Long id;
     private String username;
     transient private String password;
-    transient private User user;
+    transient private UserModel userModel;
     private Set<GrantedAuthority> authorities;
 
 

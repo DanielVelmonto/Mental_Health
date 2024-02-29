@@ -1,6 +1,8 @@
 package co.com.mentalhealth.apigateway.service;
 
 
+import co.com.mentalhealth.apigateway.model.LoginResponseDTO;
+import co.com.mentalhealth.apigateway.model.UserModel;
 import co.com.mentalhealth.apigateway.model.User;
 import co.com.mentalhealth.apigateway.security.UserPrincipal;
 import co.com.mentalhealth.apigateway.security.jwt.JwtProvider;
@@ -20,7 +22,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private JwtProvider jwtProvider;
 
     @Override
-    public User singInAndReturnJWT(User singInRequest){
+    public LoginResponseDTO singInAndReturnJWT(UserModel singInRequest){
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(singInRequest.getUsername(), singInRequest.getPassword())
@@ -30,11 +32,19 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         String jwt = jwtProvider.generateToken(userPrincipal);
 
-        User singInUser = userPrincipal.getUser();
+        UserModel singInUserModel = userPrincipal.getUserModel();
 
-        singInUser.setToken(jwt);
+        User responseLogin = new User();
+        responseLogin.setId(singInUserModel.getId());
+        responseLogin.setName(singInUserModel.getName());
+        responseLogin.setRole(singInUserModel.getRole());
+        responseLogin.setUsername(singInUserModel.getUsername());
 
-        return singInUser;
+        LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
+        loginResponseDTO.setUser(responseLogin);
+        loginResponseDTO.setToken(jwt);
+
+        return loginResponseDTO;
     }
 
 }

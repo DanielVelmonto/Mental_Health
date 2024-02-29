@@ -1,8 +1,9 @@
 package co.com.mentalhealth.apigateway.service;
 
 
-import co.com.mentalhealth.apigateway.model.User;
+import co.com.mentalhealth.apigateway.model.LoginResponseDTO;
+import co.com.mentalhealth.apigateway.model.UserModel;
 
 public interface AuthenticationService {
-    User singInAndReturnJWT(User singInRequest);
+    LoginResponseDTO singInAndReturnJWT(UserModel singInRequest);
 }
