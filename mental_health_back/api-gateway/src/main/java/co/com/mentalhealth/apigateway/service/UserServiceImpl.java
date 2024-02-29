@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService{
     public User save(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole(Role.USER);
-        user.setFechaCreacion(LocalDateTime.now());
+        user.setCreated_at(LocalDateTime.now());
         User userCreated = userRepository.save(user);
         String jwt = jwtProvider.generateToken(userCreated);
         userCreated.setToken(jwt);

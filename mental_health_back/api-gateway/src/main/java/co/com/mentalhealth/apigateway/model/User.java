@@ -20,11 +20,11 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "nombre", nullable = false)
-    private String nombre;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(name = "fecha_creacion", nullable = false)
-    private LocalDateTime fechaCreacion;
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime created_at;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
