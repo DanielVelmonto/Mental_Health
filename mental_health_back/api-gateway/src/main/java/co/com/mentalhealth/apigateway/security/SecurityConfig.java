@@ -50,6 +50,8 @@ public class SecurityConfig {
         http.authorizeRequests()
                 .requestMatchers("api/authentication/sing-in","api/authentication/sing-up")
                 .permitAll()
+                .requestMatchers(HttpMethod.GET,"api/authentication/check-token")
+                .authenticated()
                 .requestMatchers(HttpMethod.GET, "/gateway/inmueble")
                 .permitAll()
                 .requestMatchers("/gateway/inmueble/**")

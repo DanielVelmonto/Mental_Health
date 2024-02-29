@@ -47,4 +47,22 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return loginResponseDTO;
     }
 
+    @Override
+    public LoginResponseDTO checkToken(UserModel userModel){
+
+        String jwt = jwtProvider.generateToken(userModel);
+
+        User responseLogin = new User();
+        responseLogin.setId(userModel.getId());
+        responseLogin.setName(userModel.getName());
+        responseLogin.setRole(userModel.getRole());
+        responseLogin.setUsername(userModel.getUsername());
+
+        LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
+        loginResponseDTO.setUser(responseLogin);
+        loginResponseDTO.setToken(jwt);
+
+        return loginResponseDTO;
+    }
+
 }
