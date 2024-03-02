@@ -1,10 +1,10 @@
-package co.com.mentalhealth.apigateway;
+package co.com.mentalhealth.employee;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApiGatewayApplicationTests {
+class EmployeeApplicationTests {
 
 	@Test
 	void contextLoads() {
