@@ -29,4 +29,10 @@ public class CompanyController {
     public ResponseEntity<?> getAllComapnies(){
         return ResponseEntity.ok(companyServiceRequest.getAllCompanies());
     }
+
+    @GetMapping("{companyId}")
+    public ResponseEntity<?> findCompanyById(@PathVariable("companyId") Long companyId){
+        return ResponseEntity.ok(companyServiceRequest.findCompanyById(companyId));
+    }
+
 }

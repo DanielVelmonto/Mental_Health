@@ -16,4 +16,7 @@ public interface CompanyServiceRequest {
 
     @GetMapping
     List<Object> getAllCompanies();
+
+    @GetMapping("{companyId}")
+    Object findCompanyById(@PathVariable("companyId") Long companyId);
 }

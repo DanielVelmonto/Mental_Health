@@ -52,9 +52,7 @@ public class SecurityConfig {
                 .permitAll()
                 .requestMatchers(HttpMethod.GET,"api/authentication/check-token")
                 .authenticated()
-                .requestMatchers(HttpMethod.GET, "/gateway/company")
-                .permitAll()
-                .requestMatchers("/gateway/company/**")
+                .requestMatchers("/gateway/company")
                 .hasRole(Role.ADMIN.name())
                 .anyRequest().authenticated();
 
