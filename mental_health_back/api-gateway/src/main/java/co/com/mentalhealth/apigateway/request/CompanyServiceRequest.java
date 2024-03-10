@@ -19,4 +19,7 @@ public interface CompanyServiceRequest {
 
     @GetMapping("{companyId}")
     Object findCompanyById(@PathVariable("companyId") Long companyId);
+
+    @PutMapping("{companyId}")
+    Object updateCompany(@PathVariable("companyId") Long companyId, @RequestBody Object requestBody);
 }
