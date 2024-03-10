@@ -18,10 +18,14 @@ public class ApiGatewayApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("http://localhost:4200");
-				//Cambiar el localhost por la variable de entorno con el dominio admitido
-			}
-		};
+                	registry.addMapping("/**")
+				.allowedOrigins("http://localhost:4200")
+				.allowedMethods("GET", "POST", "PUT", "DELETE")
+                        	.allowedHeaders("*");
+				//Añadir métodos y headers permitidos
+		                //Cambiar el localhost por la variable de entorno con el dominio admitido
+            			}
+			};
 	}
 
 	@Bean
